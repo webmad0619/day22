@@ -1,0 +1,8 @@
+<ul>
+  {{#each allBars}}
+  <li>{{this.name}} {{this.description}} {{this.location.coordinates}}</li>
+  {{/each}}
+</ul>
+
+<a href="/add-bar">Create a new bar</a>
+<a href="/map">View all bars in a map</a>
