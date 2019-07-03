@@ -17,6 +17,7 @@ let cities = {
     zaragoza: { lat: 41.649693, lng: -0.887712 }
 }
 
+
 const theMap = new google.maps.Map(
     document.getElementById('map'),
     {

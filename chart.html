@@ -6,15 +6,163 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style>
+    html,
+    body,
+    div,
+    span,
+    applet,
+    object,
+    iframe,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    blockquote,
+    pre,
+    a,
+    abbr,
+    acronym,
+    address,
+    big,
+    cite,
+    code,
+    del,
+    dfn,
+    em,
+    img,
+    ins,
+    kbd,
+    q,
+    s,
+    samp,
+    small,
+    strike,
+    strong,
+    sub,
+    sup,
+    tt,
+    var,
+    b,
+    u,
+    i,
+    center,
+    dl,
+    dt,
+    dd,
+    ol,
+    ul,
+    li,
+    fieldset,
+    form,
+    label,
+    legend,
+    table,
+    caption,
+    tbody,
+    tfoot,
+    thead,
+    tr,
+    th,
+    td,
+    article,
+    aside,
+    canvas,
+    details,
+    embed,
+    figure,
+    figcaption,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    output,
+    ruby,
+    section,
+    summary,
+    time,
+    mark,
+    audio,
+    video {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-size: 100%;
+      font: inherit;
+      vertical-align: baseline
+    }
+
+    article,
+    aside,
+    details,
+    figcaption,
+    figure,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    section {
+      display: block
+    }
+
+    body {
+      line-height: 1
+    }
+
+    ol,
+    ul {
+      list-style: none
+    }
+
+    blockquote,
+    q {
+      quotes: none
+    }
+
+    blockquote:before,
+    blockquote:after,
+    q:before,
+    q:after {
+      content: '';
+      content: none
+    }
+
+    table {
+      border-collapse: collapse;
+      border-spacing: 0
+    }
+
+    html,
+    body {
+      overflow: hidden;
+    }
+
+    .controls {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 20px;
+    }
+  </style>
+
 </head>
 
 <body>
+  <aside class="controls">
+    <button id="reload">Reload values</button>
+  </aside>
   <canvas id="myChart"></canvas>
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
   <script>
+    let dataset = Array(7).fill().map(x => Math.random() * 100)
     var ctx = document.getElementById('myChart').getContext('2d');
     var chart = new Chart(ctx, {
       // The type of chart we want to create
@@ -27,7 +175,7 @@
           label: 'My First dataset',
           backgroundColor: 'rgb(255, 99, 132)',
           borderColor: 'rgb(255, 99, 132)',
-          data: [0, 10, 205, 2, 20, 30, 45]
+          data: dataset
         }]
       },
 
@@ -35,13 +183,28 @@
       options: {}
     });
 
-    setInterval(() => {
-      for (var i = 0 ; i < 7; i++) {
-        chart.data.datasets[0].data[i] = chart.data.datasets[0].data[i] * Math.random()
-      }
-      
+    function randomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1) + min);
+    };
+
+    function updateData() {
+      // update values one by one
+      // for (var i = 0; i < 7; i++) {
+      //   chart.data.datasets[0].data[i] = chart.data.datasets[0].data[i] * Math.random()
+      // }
+
+      const totalElements = randomInt(2, 7)
+      chart.data.datasets[0].data = Array(totalElements).fill().map(x => Math.random() * 100)
+      chart.data.labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'].splice(0, totalElements)
+
       chart.update();
-    }, 1500)
+    }
+
+    document.querySelector("#reload").onclick = updateData
+
+    // setInterval(() => {
+
+    // }, 1500)
   </script>
 </body>
 

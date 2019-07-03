@@ -3,7 +3,7 @@ const router = express.Router();
 const Bar = require("../models/Bar")
 
 /* GET home page */
-router.get('/map', (req, res, next) => {
+router.get('/mike', (req, res, next) => {
   Bar
   .find()
   .then(allBars => {
